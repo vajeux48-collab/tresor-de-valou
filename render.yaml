@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: tresor-de-valou
+    runtime: python
+    plan: starter
+    buildCommand: "echo 'Aucune dépendance à installer'"
+    startCommand: python serveur_tirage.py
+    healthCheckPath: /api/etat
+    envVars:
+      - key: TIRAGE_ADMIN_PASSWORD
+        generateValue: true
+      - key: TIRAGE_DATA_DIR
+        value: /var/data
+    disk:
+      name: valou-donnees
+      mountPath: /var/data
+      sizeGB: 1
